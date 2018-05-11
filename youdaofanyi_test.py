@@ -13,16 +13,17 @@ import random
 import time
 
 while True:
-    content = input("想翻译的词或句子（退出请输入q）:")
+    content = input("请想翻译的词或句子（退出请输入q）:")
     if content == 'q':
         break
     else:
-        # 对应的翻译URL
+        # 对应的有道翻译URL
         Request_URL = "http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule"
         
         # 创建Form_Data字典，存储类网页的Data        
         client = "fanyideskweb"
-        d = "ebSeFb%=XZ%T[KZ)c(sy!"   # 一串随机数
+        d = "ebSeFb%=XZ%T[KZ)c(sy!"   # 一串随机数，由有道翻译工作人员心情而定的字符串
+        
         # salt,sign均是有道反爬虫机制的一部分    
         salt = str(int(time.time() * 1000) + random.randint(1, 10))     
         sign = hashlib.md5((client + content + salt + d).encode('utf-8')).hexdigest()
